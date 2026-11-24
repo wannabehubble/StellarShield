@@ -1,13 +1,31 @@
 # StellarShield
 
-A PixInsight script that restores non-stellar objects that star-removal tools (StarXTerminator, StarNet) take away, specifically galaxies, back into the starless image.
+By **Zachary Eichelberger**
 
-## How it works
+Restores non-stellar objects that star-removal tools take away, specifically galaxies, back into the starless image.
 
-1. The light the star remover took is the original image minus the starless image (or the stars image itself).
-2. That light is split into separate objects.
-3. Each object is matched against the Gaia catalogue and measured (brightness, size, elongation).
-4. Objects judged non-stellar are copied back into the starless image through a soft-edged mask, and the stars image is corrected to match.
+Star removers such as StarXTerminator and StarNet often take small galaxies along with the stars. StellarShield finds what was removed, splits it into separate objects and checks each one against the Gaia catalog. It then measures each object's brightness, size and elongation. Objects judged non-stellar are copied back into the starless image through a soft-edged mask, and the stars image is corrected to match.
+
+<img width="1583" height="1200" alt="Starless image with galaxies restored by StellarShield" src="images/surf_galax_resto.jpg" />
+
+## Download
+
+StellarShield is a PixInsight script.
+
+| You use | Download | Version |
+|---|---|---|
+| **PixInsight** | [`StellarShield.js`](StellarShield.js) | 1.3.2 |
+
+## Features
+
+- **Gaia cross-matching** – removed objects are matched against Gaia DR3 or DR3/SP. Objects with no Gaia star, or with too much light or too large a shape for their Gaia star, are judged non-stellar.
+- **Round, feathered masks** – restoration masks follow each object's shape, with an adjustable soft edge.
+- **Bright star guard** – halos and diffraction spikes of bright stars are kept out of the restoration.
+- **Works with original or stars image** – use the original image (preferred) or the stars-only image. Screened stars images (StarXTerminator's Unscreen Stars) are detected automatically.
+- **Live preview** – the whole image at 1/3 resolution. Drag a box to view an area at full resolution, with a before/after toggle.
+- **Remembered settings** – settings and image choices are kept between runs, with a **Reset** button.
+
+Works on **linear and stretched (non-linear)** images.
 
 ## Requirements
 
@@ -16,13 +34,21 @@ A PixInsight script that restores non-stellar objects that star-removal tools (S
 
 ## Installation
 
-Download `StellarShield.js`, then in PixInsight choose **Script > Feature Scripts... > Add**, point it at the folder containing the file and click **Done**. The script appears under **Script > Utilities > StellarShield**. You can also run it once with **Script > Execute Script File...**.
+Download `StellarShield.js`, then in PixInsight:
+
+1. Choose **Script > Feature Scripts... > Add**.
+2. Point it at the folder containing the file and click **Done**.
+
+The script appears under **Script > Utilities > StellarShield**. You can also run it once with **Script > Execute Script File...**.
 
 ## Usage
 
 1. Run the star remover. Either work on a clone and keep the original, or generate a stars image.
 2. Open StellarShield and select the starless image plus the original (preferred) and/or the stars image.
-3. Press **Preview**. The preview shows the whole image at 1/3 resolution; drag a box to view an area at full resolution, and double-click or press **Full image** to go back. **Before / After** toggles between the starless image and the result.
+3. Press **Preview**.
+   - The preview shows the whole image at 1/3 resolution.
+   - Drag a box to view an area at full resolution; double-click or press **Full image** to go back.
+   - **Before / After** toggles between the starless image and the result.
 4. Adjust the settings and press **Apply**. Changes are undoable (Ctrl+Z). A `StellarShield_mask` image shows what was restored.
 
 ## Settings
@@ -36,8 +62,13 @@ Download `StellarShield.js`, then in PixInsight choose **Script > Feature Script
 - **Mask growth / Mask feather** – size and soft edge of the restoration mask.
 - **Mask only** – create the mask and console report without changing the images.
 
-Settings are remembered between runs; **Reset** returns them to their defaults.
+## Contributing
 
-## Author
+Bug reports and suggestions are welcome. Please open an issue with:
+- your PixInsight and StellarShield version numbers
+- the settings you used
+- a screenshot, if possible
 
-Zachary Eichelberger
+## License
+
+Released under the [MIT License](LICENSE). © 2026 Zachary Eichelberger.
