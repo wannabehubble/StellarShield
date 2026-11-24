@@ -41,27 +41,6 @@ Download `StellarShield.js`, then in PixInsight:
 
 The script appears under **Script > Utilities > StellarShield**. You can also run it once with **Script > Execute Script File...**.
 
-## Usage
-
-1. Run the star remover. Either work on a clone and keep the original, or generate a stars image.
-2. Open StellarShield and select the starless image plus the original (preferred) and/or the stars image.
-3. Press **Preview**.
-   - The preview shows the whole image at 1/3 resolution.
-   - Drag a box to view an area at full resolution; double-click or press **Full image** to go back.
-   - **Before / After** toggles between the starless image and the result.
-4. Adjust the settings and press **Apply**. Changes are undoable (Ctrl+Z). A `StellarShield_mask` image shows what was restored.
-
-## Settings
-
-- **Gaia catalog** – which Gaia database files to match against: Auto (deepest available), DR3 or DR3/SP.
-- **Stars image blend** – how the stars image combines with the starless image when no original is selected. Auto detects it; choose Screened for StarXTerminator's Unscreen Stars option.
-- **Linear data** – enables the brightness tests; uncheck for stretched images.
-- **Detection threshold / Minimum area / Maximum area** – which removed objects are considered.
-- **Gaia limit / Flux excess / Faint sources not in Gaia / Shape sensitivity / Minimum ellipticity** – how objects are judged non-stellar.
-- **Bright star guard** – fragments in the halo or spikes of stars brighter than this are ignored.
-- **Mask growth / Mask feather** – size and soft edge of the restoration mask.
-- **Mask only** – create the mask and console report without changing the images.
-
 ## Contributing
 
 Bug reports and suggestions are welcome. Please open an issue with:
